@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
-
+const backendUrl = "https://react-learning-backend.onrender.com";
 export default function UpdateProduct() {
     const [name, setName] = useState('');
     const [price, setPrice] = useState('');
@@ -11,10 +11,10 @@ export default function UpdateProduct() {
 
     useEffect(() => {
         getProductDetails();
-    }, [])
+    }, [getProductDetails])
     const getProductDetails = async () => {
 
-        let result = await fetch(`http://localhost:5000/product/${params.id}`, {
+        let result = await fetch(`${backendUrl}/product/${params.id}`, {
             headers: { authorization: JSON.parse(localStorage.getItem('token')) }
         });
         result = await result.json();
@@ -25,7 +25,7 @@ export default function UpdateProduct() {
     }
 
     const handleUpdateProduct = async () => {
-        let result = await fetch(`http://localhost:5000/product/${params.id}`,
+        let result = await fetch(`${backendUrl}/product/${params.id}`,
             {
                 method: 'put',
                 body: JSON.stringify({ name, price, category, company }),

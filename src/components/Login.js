@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-
+const backendUrl = "https://react-learning-backend.onrender.com";
 export default function Login() {
     const [email, setEmail] = React.useState("");
     const [password, setPassword] = React.useState("");
@@ -13,7 +13,7 @@ export default function Login() {
     })
 
     const handleLogin = async () => {
-        let result = await fetch('http://localhost:5000/login', {
+        let result = await fetch(`${backendUrl}/login`, {
             method: 'post',
             body: JSON.stringify({ email, password }),
             headers: { 'Content-Type': 'application/json' }

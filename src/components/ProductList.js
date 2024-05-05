@@ -1,21 +1,26 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 
+
+
 export default function ProductList() {
     const [products, setProducts] = useState([]);
+    const backendUrl = "https://react-learning-backend.onrender.com";
 
     useEffect(() => {
         getProducts();
     }, [])
     const getProducts = async () => {
-        let result = await fetch('http://localhost:5000/products', {
+        // let result = await fetch('http://localhost:5000/products', {
+        let result = await fetch(`${backendUrl}/products`, {
             headers: { authorization: JSON.parse(localStorage.getItem('token')) }
         });
         result = await result.json();
         setProducts(result);
     }
     const deleteProducts = async (id) => {
-        let result = await fetch(`http://localhost:5000/product/${id}`, {
+        // let result = await fetch(`http://localhost:5000/product/${id}`, {
+        let result = await fetch(`${backendUrl}/product/${id}`, {
             method: 'delete',
             headers: { authorization: JSON.parse(localStorage.getItem('token')) },
         });
@@ -27,7 +32,8 @@ export default function ProductList() {
     const searchHandle = async (event) => {
         let key = event.target.value;
         if (key) {
-            let result = await fetch(`http://localhost:5000/search/${key}`,
+            // let result = await fetch(`http://localhost:5000/search/${key}`,
+            let result = await fetch(`${backendUrl}/search/${key}`,
                 {
                     headers: { authorization: JSON.parse(localStorage.getItem('token')) }
                 }

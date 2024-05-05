@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-
+const backendUrl = "https://react-learning-backend.onrender.com";
 export default function AddProduct() {
     const [name, setName] = useState('');
     const [price, setPrice] = useState('');
@@ -15,7 +15,8 @@ export default function AddProduct() {
         }
         const userId = await JSON.parse(localStorage.getItem('user'))._id;
 
-        let result = await fetch('http://localhost:5000/addProduct', {
+        // let result = await fetch('http://localhost:5000/addProduct', {
+        let result = await fetch(`${backendUrl}/addProduct`, {
             method: 'post',
             body: JSON.stringify({ name, price, category, company, userId }),
             headers: {
