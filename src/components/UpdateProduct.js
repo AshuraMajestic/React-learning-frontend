@@ -10,8 +10,7 @@ export default function UpdateProduct() {
     const navigate = useNavigate();
 
 
-    const getProductDetails = async () => {
-
+    const getProductDetails = useCallback(async () => {
         let result = await fetch(`${backendUrl}/product/${params.id}`, {
             headers: { authorization: JSON.parse(localStorage.getItem('token')) }
         });
@@ -20,10 +19,12 @@ export default function UpdateProduct() {
         setPrice(result.price);
         setCategory(result.category);
         setCompany(result.company);
-    }
+    }, [params.id]);
+
     useEffect(() => {
         getProductDetails();
-    }, []);
+    }, [getProductDetails]);
+
     const handleUpdateProduct = async () => {
         let result = await fetch(`${backendUrl}/product/${params.id}`,
             {
