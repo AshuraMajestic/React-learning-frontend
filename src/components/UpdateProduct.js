@@ -23,7 +23,7 @@ export default function UpdateProduct() {
     }
     useEffect(() => {
         getProductDetails();
-    }, [params.id]);
+    }, [getProductDetails]);
     const handleUpdateProduct = async () => {
         let result = await fetch(`${backendUrl}/product/${params.id}`,
             {
