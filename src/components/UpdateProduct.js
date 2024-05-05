@@ -9,9 +9,7 @@ export default function UpdateProduct() {
     const params = useParams();
     const navigate = useNavigate();
 
-    useEffect(() => {
-        getProductDetails();
-    }, [getProductDetails])
+
     const getProductDetails = async () => {
 
         let result = await fetch(`${backendUrl}/product/${params.id}`, {
@@ -23,7 +21,9 @@ export default function UpdateProduct() {
         setCategory(result.category);
         setCompany(result.company);
     }
-
+    useEffect(() => {
+        getProductDetails();
+    }, [params.id]);
     const handleUpdateProduct = async () => {
         let result = await fetch(`${backendUrl}/product/${params.id}`,
             {
